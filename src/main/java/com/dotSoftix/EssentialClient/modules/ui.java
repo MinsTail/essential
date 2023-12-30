@@ -11,12 +11,9 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.Entity;
 import java.awt.*;
-
 import com.dotSoftix.EssentialClient.guiModes.checkRedanMode;
 import com.dotSoftix.EssentialClient.guiModes.checkBlueMode;
-
 import org.lwjgl.opengl.GL11;
-
 import static net.minecraft.client.gui.Gui.drawRect;
 
 public class ui {
@@ -26,7 +23,7 @@ public class ui {
     private Entity entity;
 
     @SubscribeEvent
-    public void drawLogo(RenderGameOverlayEvent.Post e) {
+    public void drawLogo(RenderGameOverlayEvent e) {
         switch (e.getType()) {
             case TEXT:
 
@@ -45,7 +42,7 @@ public class ui {
                     drawRect(3, 3, 110, 15, new Color(0xD81C1B1B, true).hashCode());
                 }
                 if(!checkRedanMode.isRedanModeActivated && !checkBlueMode.blueMode) {
-                    drawRect(2, 2, 110, 15, fadeColor(10)); //53
+                    drawRect(2, 2, 110, 15, fadeColor(10));
                     drawRect(3, 3, 110, 15, new Color(0xD81C1B1B, true).hashCode());
                 }
                 // ------------------------------------------------------ //
@@ -61,22 +58,22 @@ public class ui {
                     fontRender.drawString("essential | FPS: " + Minecraft.getDebugFPS(), 5, 5, new Color(0xFF5A7CFF, true).hashCode());
                 }
                 if(!checkRedanMode.isRedanModeActivated && !checkBlueMode.blueMode) {
-                    fontRender.drawString("essential | FPS: " + Minecraft.getDebugFPS(), 5, 5, fadeColor(10));
+                    fontRender.drawString("essential | FPS: " + Minecraft.getDebugFPS(), 5, 5, fadeColor(counter[0] * 300));
                 }
                 // ------------------------------------------------------ // DRAW NICK + HEAD
                 if (mc.world != null && mc.player != null) {
-                    if(!checkRedanMode.isRedanModeActivated && !checkBlueMode.blueMode) {
+                    if (!checkRedanMode.isRedanModeActivated && !checkBlueMode.blueMode) {
 
-                        drawRect(115, 2, 220, 15, com.dotSoftix.EssentialClient.modules.ui.fadeColor(10));
+                        drawRect(115, 2, 220, 15, fadeColor(counter[0] * 300));
                         drawRect(116, 3, 220, 15, new Color(0xD81C1B1B, true).hashCode());
-                        fontRender.drawString(Minecraft.getMinecraft().getSession().getUsername(), 130, 5, fadeColor(10));
+                        fontRender.drawString(Minecraft.getMinecraft().getSession().getUsername(), 130, 5, fadeColor(counter[0] * 300));
                     }
-                    if(checkRedanMode.isRedanModeActivated) {
+                    if (checkRedanMode.isRedanModeActivated) {
                         drawRect(115, 2, 220, 15, new Color(0xD8CBCBCB, true).hashCode());
                         drawRect(116, 3, 220, 15, new Color(0xD81C1B1B, true).hashCode());
                         fontRender.drawString(Minecraft.getMinecraft().getSession().getUsername(), 130, 5, new Color(0xD8FFFFFF, true).hashCode());
                     }
-                    if(checkBlueMode.blueMode) {
+                    if (checkBlueMode.blueMode) {
                         drawRect(115, 2, 220, 15, new Color(0xFF5A7CFF, true).hashCode());
                         drawRect(116, 3, 220, 15, new Color(0xD81C1B1B, true).hashCode());
                         fontRender.drawString(Minecraft.getMinecraft().getSession().getUsername(), 130, 5, new Color(0xFF5A7CFF, true).hashCode());
@@ -85,16 +82,18 @@ public class ui {
                         drawHead drawHead = new drawHead(); // 116 3
                         drawHead.drawHead(116, 3);
 
-                    } catch (Exception ignored) {}
+                    }
+                    catch (Exception ignored) {}
                 }
+
                 /////////////////////////////////////////////////////////////// DRAW MODULES
                 for (ModuleLoader moduleLoader : ClientMain.modules) {
                     if (moduleLoader.toggled) {
                         if(!checkRedanMode.isRedanModeActivated && !checkBlueMode.blueMode) {
-                            drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2, y + 10, fadeColor(counter[0] * 300));
+                            drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2, y + 10, fadeColor(10)); //counter[0] * 300
 
                             fontRender.drawString(moduleLoader.name, sr.getScaledWidth() - 4 - fontRender.getStringWidth(moduleLoader.name),
-                                    y, fadeColor(counter[0] * 300));
+                                    y, fadeColor(10));
                         }
                         if(checkBlueMode.blueMode) {
                             drawRect(sr.getScaledWidth(), y, sr.getScaledWidth() - 2, y + 10, new Color(0xFF5A7CFF, true).hashCode());
@@ -112,8 +111,6 @@ public class ui {
                         counter[0]++;
                     }
                 }
-
-
             default:
                 break;
         }

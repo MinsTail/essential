@@ -15,7 +15,7 @@ import org.lwjgl.opengl.Display;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ClientMain {
-    private final static double modVersion = 1.91;
+    private final static double modVersion = 1.92;
     public static String clientName = "essential " + modVersion;
     public static CopyOnWriteArrayList<ModuleLoader> modules = new CopyOnWriteArrayList<ModuleLoader>();
 
@@ -55,6 +55,7 @@ public class ClientMain {
         modules.add(new noFall());
         modules.add(new packetLoss());
         modules.add(new setColor());
+        modules.add(new drawCords());
 
         clickGui = new ClickGuiScreen();
     }

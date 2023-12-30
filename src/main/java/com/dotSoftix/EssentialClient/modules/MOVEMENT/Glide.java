@@ -6,11 +6,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class Glide extends ModuleLoader {
+
     public Glide() {
         super("Glide", Keyboard.KEY_NONE, Category.MOVEMENT);
     }
+
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent e) {
+    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (mc.player.fallDistance != 0 && mc.player.motionY != 0) {
             mc.player.motionY = -0.125;
         }
